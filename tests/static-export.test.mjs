@@ -50,6 +50,30 @@ test("includes GA4 and the portfolio engagement events", async () => {
   }
 });
 
+test("keeps every case-study hero inside the mobile viewport", async () => {
+  const [caseStudy, stylesheet, homepageSource, crmPage, crmExport] = await Promise.all([
+    readFile(path.join(root, "app/work/CaseStudy.tsx"), "utf8"),
+    readFile(path.join(root, "app/globals.css"), "utf8"),
+    readFile(path.join(root, "app/page.tsx"), "utf8"),
+    readFile(path.join(root, "app/work/boomer-automation-crm/page.tsx"), "utf8"),
+    readFile(path.join(out, "work/boomer-automation-crm/index.html"), "utf8"),
+  ]);
+
+  assert.match(caseStudy, /case-title-line case-title-base/);
+  assert.match(caseStudy, /case-title-line case-title-accent/);
+  assert.match(stylesheet, /grid-template-columns:\s*minmax\(0,\s*1fr\)/);
+  assert.match(stylesheet, /\.case-title\s*\{[^}]*min-width:\s*0/s);
+  assert.match(stylesheet, /\.case-title h1\s*\{[^}]*max-width:\s*100%/s);
+  assert.match(crmPage, /accent:\s*"Automation CRM"/);
+  assert.doesNotMatch(crmPage, /BoomerAutomationCRM/);
+  assert.doesNotMatch(homepageSource, /BoomerAutomationCRM/);
+
+  const visibleText = crmExport
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ");
+  assert.match(visibleText, /Boomer\s+Automation CRM/);
+});
+
 test("contains no backend or hosting starter scaffold", async () => {
   for (const forbidden of [
     ".openai/hosting.json",

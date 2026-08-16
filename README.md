@@ -16,7 +16,7 @@ npm run typecheck
 npm test
 ```
 
-`npm test` creates the static export in `out` and verifies all public routes, contact privacy, LinkedIn, GA4 events and the absence of backend starter files.
+`npm test` creates the static export in `out` and verifies all public routes, contact privacy, LinkedIn, GA4 events, mobile-safe case-study titles and the absence of backend starter files.
 
 ## Cloudflare Pages with native Git integration
 

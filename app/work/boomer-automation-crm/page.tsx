@@ -1,16 +1,16 @@
 import CaseStudy, { type CaseStudyData } from "../CaseStudy";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "BoomerAutomationCRM Case Study", description: "Public-safe architecture case study for Stefan Saladino's private multi-tenant CRM and website-intelligence platform.", alternates: { canonical: "/work/boomer-automation-crm" } };
+export const metadata: Metadata = { title: "Boomer Automation CRM Case Study", description: "Public-safe architecture case study for Stefan Saladino's private multi-tenant CRM and website-intelligence platform.", alternates: { canonical: "/work/boomer-automation-crm" } };
 
 const data: CaseStudyData = {
   index: "01",
   theme: "crm",
   kicker: "Private commercial platform · Ongoing",
   title: "Boomer",
-  accent: "AutomationCRM",
+  accent: "Automation CRM",
   thesis: "A private CRM and website-auditing platform I’m building for Boomer Automation.",
-  intro: "BoomerAutomationCRM keeps client organizations, leads, tasks, appointments, websites, audits and issue tracking in one place. The repository is private, so this page focuses on the parts of the architecture I can discuss publicly.",
+  intro: "Boomer Automation CRM keeps client organizations, leads, tasks, appointments, websites, audits and issue tracking in one place. The repository is private, so this page focuses on the parts of the architecture I can discuss publicly.",
   role: "Founder · Product designer · Full-stack developer",
   scope: "Strategy, UX, frontend, API, data, authorization, testing and delivery",
   stack: ["React", "TypeScript", "Fastify", "Prisma", "PostgreSQL"],

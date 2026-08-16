@@ -48,7 +48,10 @@ export default function CaseStudy({ data }: { data: CaseStudyData }) {
         <p className="section-index">{data.index} / Case study</p>
         <div className="case-title">
           <p>{data.kicker}</p>
-          <h1>{data.title}<span>{data.accent}</span></h1>
+          <h1>
+            <span className="case-title-line case-title-base">{data.title}</span>{" "}
+            <span className="case-title-line case-title-accent">{data.accent}</span>
+          </h1>
         </div>
         <p className="case-thesis">{data.thesis}</p>
         <div className="case-orbit" aria-hidden="true"><i /><i /><span>{data.index}</span></div>

@@ -117,7 +117,7 @@ export default function Home() {
         <div className="project-copy">
           <div className="project-number">01</div>
           <p className="project-type">Private commercial platform · Ongoing</p>
-          <h3>Boomer<span>Automation</span>CRM</h3>
+          <h3>Boomer{" "}<span>Automation</span>{" "}CRM</h3>
           <p className="project-summary">I&apos;m building this private platform to manage leads, tasks, appointments, client websites, audits and issue tracking in one place.</p>
           <ul className="project-tags" aria-label="Technology used">
             <li>React</li><li>TypeScript</li><li>Fastify</li><li>Prisma</li><li>PostgreSQL</li>
@@ -125,7 +125,7 @@ export default function Home() {
           <a className="project-link" href="/work/boomer-automation-crm" data-analytics-event="case_study_open" data-analytics-label="Boomer Automation CRM">Read the case study <Arrow /></a>
         </div>
 
-        <div className="crm-visual" role="img" aria-label="Stylized representation of the BoomerAutomationCRM interface">
+        <div className="crm-visual" role="img" aria-label="Stylized representation of the Boomer Automation CRM interface">
           <div className="crm-window">
             <div className="crm-topbar">
               <span className="crm-logo">B<span>●</span></span>
