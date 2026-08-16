@@ -74,6 +74,19 @@ test("keeps every case-study hero inside the mobile viewport", async () => {
   assert.match(visibleText, /Boomer\s+Automation CRM/);
 });
 
+test("keeps the homepage orbit and CRM visual mobile-safe", async () => {
+  const stylesheet = await readFile(path.join(root, "app/globals.css"), "utf8");
+
+  assert.match(stylesheet, /\.node-design\s*\{\s*left:\s*17%;\s*top:\s*31%/);
+  assert.match(stylesheet, /\.node-engineer\s*\{\s*left:\s*81%;\s*right:\s*auto;\s*top:\s*28%/);
+  assert.match(stylesheet, /\.node-launch\s*\{\s*left:\s*73%;\s*right:\s*auto;\s*top:\s*80%;\s*bottom:\s*auto/);
+  assert.match(stylesheet, /\.signal-stage\s*\{\s*width:\s*min\(76vw,\s*290px\);\s*margin:\s*8px auto 0/);
+  assert.match(stylesheet, /\.crm-visual\s*\{\s*width:\s*100%;\s*max-width:\s*100%;\s*margin:\s*10px auto 0/);
+  assert.match(stylesheet, /\.crm-window\s*\{\s*width:\s*100%;\s*transform:\s*none/);
+  assert.doesNotMatch(stylesheet, /\.crm-visual\s*\{\s*width:\s*128%/);
+  assert.doesNotMatch(stylesheet, /margin:\s*-6px\s+-82px/);
+});
+
 test("contains no backend or hosting starter scaffold", async () => {
   for (const forbidden of [
     ".openai/hosting.json",
