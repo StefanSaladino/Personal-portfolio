@@ -89,21 +89,31 @@ test("keeps the homepage orbit and CRM visual mobile-safe", async () => {
   assert.doesNotMatch(stylesheet, /margin:\s*-6px\s+-82px/);
 });
 
-test("keeps navigation persistent and locks mobile background scrolling", async () => {
-  const [header, homepage, stylesheet] = await Promise.all([
+test("keeps the header fixed and uses a viewport-level mobile navigation overlay", async () => {
+  const [header, homepage, stylesheet, headerStyles] = await Promise.all([
     readFile(path.join(root, "app/SiteHeader.tsx"), "utf8"),
     readFile(path.join(root, "app/page.tsx"), "utf8"),
     readFile(path.join(root, "app/globals.css"), "utf8"),
+    readFile(path.join(root, "app/SiteHeader.module.css"), "utf8"),
   ]);
 
   assert.match(homepage, /<SiteHeader\s*\/>/);
   assert.doesNotMatch(homepage, /Stefan_Saladino_Resume_2026\.pdf/);
   assert.match(header, /href="\/resume"/);
-  assert.match(header, /aria-controls="primary-navigation"/);
-  assert.match(header, /root\.classList\.add\("menu-open"\)/);
+  assert.match(header, /aria-controls="mobile-navigation"/);
+  assert.match(header, /aria-modal="true"/);
+  assert.match(header, /root\.classList\.add\("portfolio-menu-open"\)/);
+  assert.match(header, /body\.style\.position\s*=\s*"fixed"/);
+  assert.match(header, /window\.scrollTo\(0, scrollY\)/);
   assert.match(header, /event\.key === "Escape"/);
-  assert.match(stylesheet, /\.site-header\s*\{[^}]*position:\s*fixed/s);
-  assert.match(stylesheet, /html\.menu-open,\s*html\.menu-open body\s*\{[^}]*overflow:\s*hidden/s);
+  assert.match(header, /<\/header>\s*\n\s*\{menuOpen && \(/s);
+  assert.match(headerStyles, /\.header\s*\{[^}]*position:\s*fixed/s);
+  assert.match(
+    headerStyles,
+    /\.mobileMenu\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?inset:\s*0;[\s\S]*?height:\s*100dvh;/,
+  );
+  assert.match(headerStyles, /:global\(html\.portfolio-menu-open body\)/);
+  assert.match(headerStyles, /overflow-y:\s*auto/);
   assert.match(stylesheet, /scroll-padding-top:\s*108px/);
 });
 
