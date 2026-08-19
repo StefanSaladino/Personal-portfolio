@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { usePortfolioAnalytics } from "./Analytics";
+import SiteHeader from "./SiteHeader";
 
 const Arrow = () => (
   <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -16,7 +17,6 @@ const EMAIL_CODEPOINTS = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
   usePortfolioAnalytics();
 
@@ -44,25 +44,11 @@ export default function Home() {
   };
 
   return (
-    <main>
+    <>
       <a className="skip-link" href="#work">Skip to selected work</a>
+      <SiteHeader />
 
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Stefan Saladino, home">
-          <span className="brand-mark">SS</span>
-          <span className="brand-name">Stefan <b>Saladino</b></span>
-        </a>
-        <nav className={menuOpen ? "nav-links is-open" : "nav-links"} aria-label="Primary navigation">
-          <a href="#work" onClick={() => setMenuOpen(false)}>Work</a>
-          <a href="#capabilities" onClick={() => setMenuOpen(false)}>Capabilities</a>
-          <a href="#about" onClick={() => setMenuOpen(false)}>About</a>
-          <a href="/Stefan_Saladino_Resume_2026.pdf" download="Stefan_Saladino_Resume_2026.pdf" onClick={() => setMenuOpen(false)}>Résumé ↓</a>
-          <a className="nav-contact" href="#contact" onClick={() => setMenuOpen(false)}>Let&apos;s talk <Arrow /></a>
-        </nav>
-        <button className={menuOpen ? "menu-toggle is-open" : "menu-toggle"} type="button" aria-label={menuOpen ? "Close navigation" : "Open navigation"} aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
-          <span /><span />
-        </button>
-      </header>
+      <main>
 
       <section className="hero" id="top" ref={heroRef}>
         <div className="hero-grid" aria-hidden="true" />
@@ -78,7 +64,7 @@ export default function Home() {
             <p>I&apos;m a full-stack developer and the founder of Boomer Automation. I take projects from the first sketch through design, development, testing and launch.</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#work">See my work <Arrow /></a>
-              <a className="text-link" href="/Stefan_Saladino_Resume_2026.pdf" download="Stefan_Saladino_Resume_2026.pdf">Download résumé ↓</a>
+              <a className="text-link" href="/resume">View résumé →</a>
             </div>
           </div>
         </div>
@@ -306,13 +292,14 @@ export default function Home() {
           <div>
             <a href="https://github.com/StefanSaladino" target="_blank" rel="noreferrer" data-analytics-event="social_profile_visit" data-analytics-label="GitHub">GitHub ↗</a>
             <a href="https://www.linkedin.com/in/stefan-saladino-32101a1a4" target="_blank" rel="noreferrer" data-analytics-event="social_profile_visit" data-analytics-label="LinkedIn">LinkedIn ↗</a>
-            <a href="/Stefan_Saladino_Resume_2026.pdf" download="Stefan_Saladino_Resume_2026.pdf">Résumé ↓</a>
+            <a href="/resume">View résumé →</a>
             <a href="https://boomerautomation.com" target="_blank" rel="noreferrer" data-analytics-event="client_site_visit" data-analytics-label="Boomer Automation">Boomer Automation ↗</a>
           </div>
         </div>
       </section>
 
       <footer><span>© 2026 Stefan Saladino</span><span>Designed + engineered in Ontario</span><a href="#top">Back to top ↑</a></footer>
-    </main>
+      </main>
+    </>
   );
 }

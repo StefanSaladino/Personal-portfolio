@@ -8,11 +8,13 @@ const out = path.join(root, "out");
 
 const routeFiles = [
   "index.html",
+  "resume/index.html",
   "work/boomer-automation-crm/index.html",
   "work/collaborative-pwa/index.html",
   "work/home-run-derby/index.html",
   "robots.txt",
   "sitemap.xml",
+  "Stefan_Saladino_Resume_2026.pdf",
 ];
 
 test("exports every public portfolio route", async () => {
@@ -85,6 +87,39 @@ test("keeps the homepage orbit and CRM visual mobile-safe", async () => {
   assert.match(stylesheet, /\.crm-window\s*\{\s*width:\s*100%;\s*transform:\s*none/);
   assert.doesNotMatch(stylesheet, /\.crm-visual\s*\{\s*width:\s*128%/);
   assert.doesNotMatch(stylesheet, /margin:\s*-6px\s+-82px/);
+});
+
+test("keeps navigation persistent and locks mobile background scrolling", async () => {
+  const [header, homepage, stylesheet] = await Promise.all([
+    readFile(path.join(root, "app/SiteHeader.tsx"), "utf8"),
+    readFile(path.join(root, "app/page.tsx"), "utf8"),
+    readFile(path.join(root, "app/globals.css"), "utf8"),
+  ]);
+
+  assert.match(homepage, /<SiteHeader\s*\/>/);
+  assert.doesNotMatch(homepage, /Stefan_Saladino_Resume_2026\.pdf/);
+  assert.match(header, /href="\/resume"/);
+  assert.match(header, /aria-controls="primary-navigation"/);
+  assert.match(header, /root\.classList\.add\("menu-open"\)/);
+  assert.match(header, /event\.key === "Escape"/);
+  assert.match(stylesheet, /\.site-header\s*\{[^}]*position:\s*fixed/s);
+  assert.match(stylesheet, /html\.menu-open,\s*html\.menu-open body\s*\{[^}]*overflow:\s*hidden/s);
+  assert.match(stylesheet, /scroll-padding-top:\s*108px/);
+});
+
+test("serves the résumé as a web page with explicit PDF actions", async () => {
+  const [resumeSource, resumeExport, sitemap] = await Promise.all([
+    readFile(path.join(root, "app/resume/page.tsx"), "utf8"),
+    readFile(path.join(out, "resume/index.html"), "utf8"),
+    readFile(path.join(out, "sitemap.xml"), "utf8"),
+  ]);
+
+  assert.match(resumeSource, /<object[^>]+type="application\/pdf"/s);
+  assert.match(resumeSource, /download="Stefan_Saladino_Resume_2026\.pdf"/);
+  assert.match(resumeExport, /Open PDF/);
+  assert.match(resumeExport, /Download PDF/);
+  assert.match(resumeExport, /Stefan_Saladino_Resume_2026\.pdf/);
+  assert.match(sitemap, /\/resume/);
 });
 
 test("contains no backend or hosting starter scaffold", async () => {
