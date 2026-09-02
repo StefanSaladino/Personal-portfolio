@@ -5,7 +5,7 @@ import { usePortfolioAnalytics } from "../Analytics";
 
 type CaseStudyData = {
   index: string;
-  theme: "crm" | "hrd" | "collab";
+  theme: "crm" | "hrd" | "collab" | "topset";
   kicker: string;
   title: string;
   accent: string;

@@ -27,8 +27,8 @@ const data: CaseStudyData = {
   outcome: "The app can keep adding shared activities without redesigning privacy and synchronization every time. New features inherit the same approach to identity, ownership and real-time updates.",
   nodes: ["Authenticated user", "Product action", "Policy boundary", "Database function", "Realtime update"],
   principles: [{ value: "Realtime", label: "updates on both devices" }, { value: "Creator", label: "edit ownership" }, { value: "RLS", label: "data privacy rules" }, { value: "PWA", label: "mobile-first app" }],
-  nextHref: "/#work",
-  nextLabel: "Return to selected work",
+  nextHref: "/work/top-set",
+  nextLabel: "Top Set",
 };
 
 export default function Page() { return <CaseStudy data={data} />; }

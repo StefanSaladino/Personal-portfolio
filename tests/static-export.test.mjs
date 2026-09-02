@@ -12,6 +12,7 @@ const routeFiles = [
   "work/boomer-automation-crm/index.html",
   "work/collaborative-pwa/index.html",
   "work/home-run-derby/index.html",
+  "work/top-set/index.html",
   "robots.txt",
   "sitemap.xml",
   "Stefan_Saladino_Resume_2026.pdf",
@@ -21,6 +22,22 @@ test("exports every public portfolio route", async () => {
   for (const routeFile of routeFiles) {
     await access(path.join(out, routeFile));
   }
+});
+
+test("publishes Top Set as a complete portfolio case study", async () => {
+  const [homepage, caseStudy, sitemap] = await Promise.all([
+    readFile(path.join(out, "index.html"), "utf8"),
+    readFile(path.join(out, "work/top-set/index.html"), "utf8"),
+    readFile(path.join(out, "sitemap.xml"), "utf8"),
+    access(path.join(out, "projects/top-set-active-workout.jpeg")),
+  ]);
+
+  assert.match(homepage, /Top Set/);
+  assert.match(homepage, /\/work\/top-set/);
+  assert.match(caseStudy, /Published product/);
+  assert.match(caseStudy, /Active lift/);
+  assert.match(caseStudy, /125 XP/);
+  assert.match(sitemap, /\/work\/top-set/);
 });
 
 test("keeps the contact details private and LinkedIn exact", async () => {
@@ -102,9 +119,7 @@ test("keeps the header fixed and uses a viewport-level mobile navigation overlay
   assert.match(header, /href="\/resume"/);
   assert.match(header, /aria-controls="mobile-navigation"/);
   assert.match(header, /aria-modal="true"/);
-  assert.match(header, /root\.classList\.add\("portfolio-menu-open"\)/);
-  assert.match(header, /body\.style\.position\s*=\s*"fixed"/);
-  assert.match(header, /window\.scrollTo\(0, scrollY\)/);
+  assert.match(header, /root\.classList\.add\("menu-open"\)/);
   assert.match(header, /event\.key === "Escape"/);
   assert.match(header, /<\/header>\s*\n\s*\{menuOpen && \(/s);
   assert.match(headerStyles, /\.header\s*\{[^}]*position:\s*fixed/s);
@@ -112,8 +127,8 @@ test("keeps the header fixed and uses a viewport-level mobile navigation overlay
     headerStyles,
     /\.mobileMenu\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?inset:\s*0;[\s\S]*?height:\s*100dvh;/,
   );
-  assert.match(headerStyles, /:global\(html\.portfolio-menu-open body\)/);
   assert.match(headerStyles, /overflow-y:\s*auto/);
+  assert.match(stylesheet, /html\.menu-open,\s*html\.menu-open body\s*\{[^}]*overflow:\s*hidden/s);
   assert.match(stylesheet, /scroll-padding-top:\s*108px/);
 });
 
@@ -124,7 +139,7 @@ test("serves the résumé as a web page with explicit PDF actions", async () => 
     readFile(path.join(out, "sitemap.xml"), "utf8"),
   ]);
 
-  assert.match(resumeSource, /<object[^>]+type="application\/pdf"/s);
+  assert.match(resumeSource, /<main[^>]+id="resume-document"/s);
   assert.match(resumeSource, /download="Stefan_Saladino_Resume_2026\.pdf"/);
   assert.match(resumeExport, /Open PDF/);
   assert.match(resumeExport, /Download PDF/);

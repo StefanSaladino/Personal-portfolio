@@ -11,5 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/work/boomer-automation-crm`, lastModified: new Date(), changeFrequency: "monthly", priority: .8 },
     { url: `${base}/work/home-run-derby`, lastModified: new Date(), changeFrequency: "monthly", priority: .8 },
     { url: `${base}/work/collaborative-pwa`, lastModified: new Date(), changeFrequency: "monthly", priority: .8 },
+    { url: `${base}/work/top-set`, lastModified: new Date(), changeFrequency: "monthly", priority: .8 },
   ];
 }

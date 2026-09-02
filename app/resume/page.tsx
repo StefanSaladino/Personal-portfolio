@@ -14,7 +14,7 @@ export default function ResumePage() {
     <>
       <a className="skip-link" href="#resume-document">Skip to résumé</a>
       <SiteHeader />
-      <main className="resume-page">
+      <main className="resume-page" id="resume-document">
         <section className="resume-intro">
           <p className="section-index">Résumé / 2026</p>
           <div className="resume-heading">

@@ -96,7 +96,7 @@ export default function Home() {
 
       <section className="work-intro" id="work">
         <div><p className="section-index">01 / Selected work</p><h2>A few things<br />I&apos;ve built.</h2></div>
-        <p className="section-lede">My work ranges from a private CRM and website-auditing platform to a browser baseball game, a shared mobile app and websites for working businesses.</p>
+        <p className="section-lede">My work ranges from a private CRM and website-auditing platform to a published fitness PWA, a browser baseball game, a shared mobile app and websites for working businesses.</p>
       </section>
 
       <article className="featured-project crm-project">
@@ -199,6 +199,25 @@ export default function Home() {
           </div>
           <figcaption><span>REAL PRODUCT SCREEN</span><strong>Shared home · Private names redacted</strong></figcaption>
         </figure>
+      </article>
+
+      <article className="featured-project topset-project">
+        <figure className="project-media topset-media">
+          <div className="project-media-frame">
+            <img src="/projects/top-set-active-workout.jpeg" width="1007" height="2047" loading="lazy" alt="Top Set mobile workout screen showing an active barbell bench press set with weight and repetitions" />
+          </div>
+          <figcaption><span>REAL PRODUCT SCREEN</span><strong>Active lift · Set tracking</strong></figcaption>
+        </figure>
+        <div className="project-copy topset-copy">
+          <div className="project-number">04</div>
+          <p className="project-type">Published product · Mobile-first fitness PWA</p>
+          <h3>Top<span>Set</span></h3>
+          <p className="project-summary">A lifting-first fitness app I designed and built to track workouts, measure personal progress and turn consistency into friendly competition.</p>
+          <ul className="project-tags" aria-label="Technology used">
+            <li>React</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL</li><li>PWA</li>
+          </ul>
+          <a className="project-link" href="/work/top-set" data-analytics-event="case_study_open" data-analytics-label="Top Set">Read the case study <Arrow /></a>
+        </div>
       </article>
 
       <section className="production-work">
